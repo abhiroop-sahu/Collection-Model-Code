@@ -12,3 +12,7 @@ class CollectionNet(nn.Module):
     x = F.relu(self.pl1(x))
     x = F.relu(self.pl2(x)) # the output
     return x
+
+model = CollectionNet().to(device)
+loss_fn = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
