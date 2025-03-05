@@ -34,3 +34,8 @@ class ConvNet(nn.Module):
         x = x.view(x.size(0), -1)  # Flatten before passing to FC layers
         x = self.fc_layers(x)
         return x
+
+
+model_reg = ConvNet().to(device)
+loss_fn_reg = nn.CrossEntropyLoss()
+optimizer_reg = torch.optim.Adam(model_reg.parameters(), lr=0.00005)
