@@ -66,13 +66,13 @@ def train_loop(dataloader, model, loss_fn, optimizer):
         prev_x, prev_y = sample.x1, sample.y1
 
         # Actual training
-        # Note: We do the optimization step at the end, where we do the weighted average of the gradients, which is done by multiplying each individual loss by the following
+        # Note: We do the optimization step at the end, where we do the weighted average of the loss, which is done by multiplying each individual loss by the following
         multiplier = max(0, (1/3) * (math.log((-t/time_decay) + 1, 1.5) + 1) * ((1 + dt) ** (1 + dt)))
         loss += loss_fn(pred[i], y[0]) * multiplier
         t += 1
 
-      # As we received all the gradients, do the optimization step
-      loss.backward() # This will cumulate the gradients
+      # As we added the weighted sums of the loss to the total loss, do the optimization step
+      loss.backward()
       optimizer.step()
       optimizer.zero_grad()
 
