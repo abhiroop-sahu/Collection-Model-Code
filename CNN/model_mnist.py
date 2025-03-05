@@ -18,3 +18,8 @@ class ConvNet(nn.Module):
         x = F.relu(self.fc2(x))
         x = F.relu(self.fc3(x)) # the output
         return x
+
+
+model_reg = ConvNet().to(device)
+loss_fn_reg = nn.CrossEntropyLoss()
+optimizer_reg = torch.optim.Adam(model_reg.parameters(), lr=0.001)
